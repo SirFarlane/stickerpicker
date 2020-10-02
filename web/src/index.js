@@ -6,8 +6,8 @@
 import { html, render, Component } from "../lib/htm/preact.js"
 import { Spinner } from "./spinner.js"
 import * as widgetAPI from "./widget-api.js"
-import * as frequent from "./frequently-used.js"
 import * as favorite from "./favorite.js"
+import * as frequent from "./frequently-used.js"
 
 // The base URL for fetching packs. The app will first fetch ${PACK_BASE_URL}/index.json,
 // then ${PACK_BASE_URL}/${packFile} for each packFile in the packs object of the index.json file.
@@ -41,7 +41,7 @@ class App extends Component {
             favorite: {
                 id: "favorite",
                 title: "Favorite",
-                stickerIDs: favorite.get(),
+                stickerIDs: [],
                 stickers: [],
             },
 			frequentlyUsed: {
