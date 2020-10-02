@@ -11,6 +11,6 @@ export const add = id => {
 	window.localStorage.mauFavoriteStickerIDs = JSON.stringify(FAVORITE)
 }
 
-export const get = () => {
+export const get = (limit=16) => {
     return FAVORITE
 }
