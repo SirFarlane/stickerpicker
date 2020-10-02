@@ -58,6 +58,7 @@ class App extends Component {
 			this.defaultTheme = "light"
 		}
 		this.stickersByID = new Map(JSON.parse(localStorage.mauFrequentlyUsedStickerCache || "[]"))
+        this.state.favorite.stickers = this._getStickersByID(this.state.favorite.stickerIDs)
 		this.state.frequentlyUsed.stickers = this._getStickersByID(this.state.frequentlyUsed.stickerIDs)
 		this.imageObserver = null
 		this.packListRef = null
@@ -247,6 +248,7 @@ class App extends Component {
 		}
 		return html`<main class="has-content ${theme}">
 			<nav onWheel=${this.navScroll} ref=${elem => this.navRef = elem}>
+				<${NavBarItem} pack=${this.state.favorite} iconOverride="favorite" />
 				<${NavBarItem} pack=${this.state.frequentlyUsed} iconOverride="recent" />
 				${this.state.packs.map(pack => html`<${NavBarItem} id=${pack.id} pack=${pack}/>`)}
 				<${NavBarItem} pack=${{ id: "settings", title: "Settings" }} iconOverride="settings" />
