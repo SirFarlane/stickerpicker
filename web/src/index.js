@@ -41,7 +41,7 @@ class App extends Component {
             favorite: {
                 id: "favorite",
                 title: "Favorite",
-                stickerIDs: [],
+                stickerIDs: favorite.get(),
                 stickers: [],
             },
 			frequentlyUsed: {

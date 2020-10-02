@@ -12,5 +12,5 @@ export const add = id => {
 }
 
 export const get = (limit=16) => {
-    return FAVORITE
+    return Object.entries(FAVORITE)
 }
