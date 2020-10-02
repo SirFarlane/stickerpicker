@@ -38,7 +38,7 @@ class App extends Component {
 			error: null,
 			stickersPerRow: parseInt(localStorage.mauStickersPerRow || "4"),
 			theme: localStorage.mauStickerThemeOverride || this.defaultTheme,
-            favorite : {
+            favorite: {
                 id: "favorite",
                 title: "Favorite",
                 stickerIDs: favorite.get(),
@@ -254,6 +254,7 @@ class App extends Component {
 				<${NavBarItem} pack=${{ id: "settings", title: "Settings" }} iconOverride="settings" />
 			</nav>
 			<div class="pack-list ${isMobileSafari ? "ios-safari-hack" : ""}" ref=${elem => this.packListRef = elem}>
+				<${Pack} pack=${this.state.favorite} send=${this.sendSticker} />
 				<${Pack} pack=${this.state.frequentlyUsed} send=${this.sendSticker} />
 				${this.state.packs.map(pack => html`<${Pack} id=${pack.id} pack=${pack} send=${this.sendSticker} />`)}
 				<${Settings} app=${this}/>
