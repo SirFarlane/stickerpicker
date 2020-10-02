@@ -7,6 +7,7 @@ import { html, render, Component } from "../lib/htm/preact.js"
 import { Spinner } from "./spinner.js"
 import * as widgetAPI from "./widget-api.js"
 import * as frequent from "./frequently-used.js"
+import * as favorite from "./favorite.js"
 
 // The base URL for fetching packs. The app will first fetch ${PACK_BASE_URL}/index.json,
 // then ${PACK_BASE_URL}/${packFile} for each packFile in the packs object of the index.json file.
@@ -37,6 +38,12 @@ class App extends Component {
 			error: null,
 			stickersPerRow: parseInt(localStorage.mauStickersPerRow || "4"),
 			theme: localStorage.mauStickerThemeOverride || this.defaultTheme,
+            favorite : {
+                id: "favorite",
+                title: "Favorite",
+                stickerIDs: favorite.get(),
+                stickers: [],
+            },
 			frequentlyUsed: {
 				id: "frequently-used",
 				title: "Frequently used",
@@ -65,6 +72,19 @@ class App extends Component {
 	_getStickersByID(ids) {
 		return ids.map(id => this.stickersByID.get(id)).filter(sticker => !!sticker)
 	}
+
+    updateFavorite() {
+        const stickerIDs = favorite.get()
+        const stickers = this._getStickersByID(stickerIDs)
+        this.setState({
+            favorite: {
+                ...this.state.favorite,
+                stickerIDs,
+                stickers,
+            },
+        })
+        localStorage.mauFavoriteStickerCache = JSON.stringify(stickers.map(sticker => [sticker.id, sticker]))
+    }
 
 	updateFrequentlyUsed() {
 		const stickerIDs = frequent.get()
